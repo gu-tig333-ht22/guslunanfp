@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Todo List',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -22,9 +24,11 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(
+        title: ('TIG169 TODO'),
+      ),
     );
   }
 }
@@ -93,11 +97,14 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            _checkbox(),
+            _checkbox(),
+            _checkbox(),
+            _insertTaskField(),
+            _addtext(),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
@@ -106,10 +113,84 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.indigo,
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        tooltip: 'ToDo',
+        child: const Icon(Icons.add, size: 50, color: Colors.white),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+Widget _checkbox() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      Checkbox(
+        value: false,
+        onChanged: (val) {},
+      ),
+      const Text('Tidy room',
+          style: TextStyle(decoration: TextDecoration.lineThrough)),
+      OutlinedButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.close,
+          color: Colors.black,
+        ),
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+/*Widget _checkbox2() {
+  return Container(
+      decoration: Border.all(color: Colors.black),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Checkbox(
+            value: false,
+            onChanged: (val) {},
+          ),
+          const Text('Tidy room'),
+          Icon(Icons.close),
+        ],
+      ));
+}*/
+
+Widget _insertTaskField() {
+  return Container(
+      margin: EdgeInsets.only(left: 16, right: 16),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'What are you going to do?',
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.cyan, width: 3.0),
+          ),
+        ),
+      ));
+}
+
+Widget _addtext() {
+  return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+    ElevatedButton.icon(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        primary: Colors.grey, // background
+        onPrimary: Colors.black, // foreground
+      ),
+      icon: Icon(
+        // <-- Icon
+        Icons.add,
+        size: 30.0,
+      ),
+      label: Text('ADD'), // <-- Text
+    ),
+  ]);
 }
