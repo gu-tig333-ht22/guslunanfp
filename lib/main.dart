@@ -105,10 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
             _checkbox(),
             _insertTaskField(),
             _addtext(),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
           ],
         ),
       ),
