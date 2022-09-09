@@ -75,10 +75,18 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.more_vert),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SecondView()));
+              },
+            )
+          ]),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -101,10 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _checkbox(),
-            _checkbox(),
-            _checkbox(),
-            _insertTaskField(),
-            _addtext(),
+            _list(),
           ],
         ),
       ),
@@ -144,21 +149,29 @@ Widget _checkbox() {
   );
 }
 
-/*Widget _checkbox2() {
-  return Container(
-      decoration: Border.all(color: Colors.black),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Checkbox(
-            value: false,
-            onChanged: (val) {},
-          ),
-          const Text('Tidy room'),
-          Icon(Icons.close),
-        ],
-      ));
-}*/
+Widget _list() {
+  var list = [
+    'Write a book',
+    'Do homework',
+    'Tidy room',
+    'Watch TV',
+    'Nap',
+    'Shop groceries',
+    'Have fun',
+    'Meditate'
+  ];
+
+  return ListView(
+    children: list.map((item) => _item(item)).toList(),
+  );
+}
+
+Widget _item(text) {
+  return Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Text(text, style: TextStyle(fontSize: 18)),
+  );
+}
 
 Widget _insertTaskField() {
   return Container(
@@ -167,7 +180,7 @@ Widget _insertTaskField() {
         decoration: InputDecoration(
           hintText: 'What are you going to do?',
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.cyan, width: 3.0),
+            borderSide: BorderSide(color: Colors.black, width: 3.0),
           ),
         ),
       ));
@@ -189,4 +202,22 @@ Widget _addtext() {
       label: Text('ADD'), // <-- Text
     ),
   ]);
+}
+
+class SecondView extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('TIG169 TODO'),
+        ),
+        body: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(height: 50),
+            Container(height: 100, child: _insertTaskField()),
+            _addtext(),
+          ],
+        )));
+  }
 }
