@@ -87,24 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             )
           ]),
-      body:
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          _list(),
+      body: _list(),
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.indigo,
         onPressed: _incrementCounter,
@@ -125,6 +109,33 @@ Widget _checkbox() {
       ),
       const Text('Tidy room',
           style: TextStyle(decoration: TextDecoration.lineThrough)),
+      OutlinedButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.close,
+          color: Colors.black,
+        ),
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _checkboxone() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      Checkbox(
+        value: false,
+        onChanged: (val) {},
+      ),
+      const Text(
+        'Tidy room',
+      ),
       OutlinedButton(
         onPressed: () {},
         child: Icon(
