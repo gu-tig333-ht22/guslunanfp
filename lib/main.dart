@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         )
       ]),
-      body: _list(),
+      body: _todoitem(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.indigo,
         onPressed: () {}, //_incrementCounter,
@@ -95,26 +95,21 @@ class _MyHomePageState extends State<MyHomePage> {
   );
 }*/
 
-Widget _list() {
-  var list = [
-    'Write a book',
-    'Do homework',
-    'Tidy room',
-    'Watch TV',
-    'Nap',
-    'Shop groceries',
-    'Have fun',
-    'Meditate'
-  ];
-
-  return ListView(
-    children: list.map((item) => _item(item)).toList(),
-  );
-}
-
-Widget _item(text) {
-  return Padding(
-    padding: const EdgeInsets.all(20.0),
-    child: Text(text, style: const TextStyle(fontSize: 18)),
+Widget _todoitem() {
+  return ListTile(
+    leading: Checkbox(value: false, onChanged: (val) {}),
+    title: const Text('Heeej'),
+    trailing: OutlinedButton(
+      onPressed: () {},
+      style: OutlinedButton.styleFrom(
+        side: const BorderSide(
+          color: Colors.transparent,
+        ),
+      ),
+      child: const Icon(
+        Icons.close,
+        color: Colors.black,
+      ),
+    ),
   );
 }
