@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), actions: [
         IconButton(
-          icon: Icon(Icons.more_vert),
+          icon: const Icon(Icons.more_vert),
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => SecondView()));
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-Widget _checkbox() {
+/*Widget _checkbox() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
@@ -93,9 +93,9 @@ Widget _checkbox() {
       ),
     ],
   );
-}
+}*/
 
-Widget _checkboxone() {
+/*Widget _checkboxone() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
@@ -120,7 +120,7 @@ Widget _checkboxone() {
       ),
     ],
   );
-}
+}*/
 
 Widget _list() {
   var list = [
@@ -142,13 +142,13 @@ Widget _list() {
 Widget _item(text) {
   return Padding(
     padding: const EdgeInsets.all(20.0),
-    child: Text(text, style: TextStyle(fontSize: 18)),
+    child: Text(text, style: const TextStyle(fontSize: 18)),
   );
 }
 
 Widget _insertTaskField() {
   return Container(
-      margin: EdgeInsets.only(left: 16, right: 16),
+      margin: const EdgeInsets.only(left: 16, right: 16),
       child: TextField(
         decoration: InputDecoration(
           hintText: 'What are you going to do?',
@@ -164,15 +164,15 @@ Widget _addtext() {
     ElevatedButton.icon(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-        primary: Colors.grey, // background
-        onPrimary: Colors.black, // foreground
+        backgroundColor: Colors.grey, // background
+        foregroundColor: Colors.black, // foreground
       ),
-      icon: Icon(
+      icon: const Icon(
         // <-- Icon
         Icons.add,
         size: 30.0,
       ),
-      label: Text('ADD'), // <-- Text
+      label: const Text('ADD'), // <-- Text
     ),
   ]);
 }
@@ -181,7 +181,7 @@ class SecondView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('TIG169 TODO'),
+          title: const Text('TIG169 TODO'),
         ),
         body: Center(
             child: Column(
