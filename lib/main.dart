@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -33,18 +31,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  //int _counter = 0;
 
-  void _incrementCounter() {
+  /* void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
+      
       _counter++;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -53,15 +52,15 @@ class _MyHomePageState extends State<MyHomePage> {
         IconButton(
           icon: const Icon(Icons.more_vert),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => SecondView()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const SecondView()));
           },
         )
       ]),
       body: _list(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.indigo,
-        onPressed: _incrementCounter,
+        onPressed: () {}, //_incrementCounter,
         tooltip: 'ToDo',
         child: const Icon(Icons.add, size: 50, color: Colors.white),
       ),
@@ -79,33 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       const Text('Tidy room',
           style: TextStyle(decoration: TextDecoration.lineThrough)),
-      OutlinedButton(
-        onPressed: () {},
-        child: Icon(
-          Icons.close,
-          color: Colors.black,
-        ),
-        style: OutlinedButton.styleFrom(
-          side: BorderSide(
-            color: Colors.transparent,
-          ),
-        ),
-      ),
-    ],
-  );
-}*/
-
-/*Widget _checkboxone() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      Checkbox(
-        value: false,
-        onChanged: (val) {},
-      ),
-      const Text(
-        'Tidy room',
-      ),
       OutlinedButton(
         onPressed: () {},
         child: Icon(
@@ -149,7 +121,7 @@ Widget _item(text) {
 Widget _insertTaskField() {
   return Container(
       margin: const EdgeInsets.only(left: 16, right: 16),
-      child: TextField(
+      child: const TextField(
         decoration: InputDecoration(
           hintText: 'What are you going to do?',
           focusedBorder: OutlineInputBorder(
@@ -164,20 +136,22 @@ Widget _addtext() {
     ElevatedButton.icon(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.grey, // background
-        foregroundColor: Colors.black, // foreground
+        backgroundColor: Colors.grey,
+        foregroundColor: Colors.black,
       ),
       icon: const Icon(
-        // <-- Icon
         Icons.add,
         size: 30.0,
       ),
-      label: const Text('ADD'), // <-- Text
+      label: const Text('ADD'),
     ),
   ]);
 }
 
 class SecondView extends StatelessWidget {
+  const SecondView({super.key});
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -188,7 +162,7 @@ class SecondView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(height: 50),
-            Container(height: 100, child: _insertTaskField()),
+            SizedBox(height: 100, child: _insertTaskField()),
             _addtext(),
           ],
         )));
