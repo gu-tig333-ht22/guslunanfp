@@ -61,39 +61,16 @@ class _MyHomePageState extends State<MyHomePage> {
       body: _todoitem(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.indigo,
-        onPressed: () {}, //_incrementCounter,
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const SecondView()));
+        }, //_incrementCounter,
         tooltip: 'ToDo',
         child: const Icon(Icons.add, size: 50, color: Colors.white),
       ),
     );
   }
 }
-
-/*Widget _checkbox() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      Checkbox(
-        value: false,
-        onChanged: (val) {},
-      ),
-      const Text('Tidy room',
-          style: TextStyle(decoration: TextDecoration.lineThrough)),
-      OutlinedButton(
-        onPressed: () {},
-        child: Icon(
-          Icons.close,
-          color: Colors.black,
-        ),
-        style: OutlinedButton.styleFrom(
-          side: BorderSide(
-            color: Colors.transparent,
-          ),
-        ),
-      ),
-    ],
-  );
-}*/
 
 Widget _todoitem() {
   return ListTile(
