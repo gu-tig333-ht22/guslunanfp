@@ -49,7 +49,6 @@ class SecondViewState extends State<SecondView> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(height: 50),
-            const MyStatefulWidget(),
             Container(
                 margin: const EdgeInsets.only(left: 16, right: 16),
                 child: TextField(
