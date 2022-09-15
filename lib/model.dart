@@ -8,8 +8,10 @@ class TodoItem {
 
 class MyState extends ChangeNotifier {
   final List<TodoItem> _list = [];
+  String _filterBy = 'All';
 
   List<TodoItem> get list => _list;
+  String get filterBy => _filterBy;
 
   void addItem(TodoItem item) {
     _list.add(item);
@@ -18,6 +20,11 @@ class MyState extends ChangeNotifier {
 
   void removeItem(TodoItem item) {
     _list.remove(item);
+    notifyListeners();
+  }
+
+  void setFilterBy(filterBy) {
+    this._filterBy = filterBy;
     notifyListeners();
   }
 }
