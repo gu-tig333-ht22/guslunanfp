@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:template/test.dart';
 import 'model.dart';
 
 class TodoList extends StatelessWidget {
@@ -15,7 +16,7 @@ class TodoList extends StatelessWidget {
 
   Widget _listItem(context, item) {
     return ListTile(
-      leading: Checkbox(value: false, onChanged: (val) {}),
+      leading: MyStatefulWidget(),
       title: Text(item.message),
       trailing: OutlinedButton(
         onPressed: () {

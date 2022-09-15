@@ -17,15 +17,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title), actions: [
+      appBar: AppBar(title: Center(child: Text(widget.title)), actions: [
         IconButton(
           icon: const Icon(Icons.more_vert),
           onPressed: () async {
             var newItem = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        SecondView(TodoItem(message: 'message'))));
+                    builder: (context) => SecondView(TodoItem(message: ''))));
             Provider.of<MyState>(context, listen: false).addItem(newItem);
           },
         )
@@ -33,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Consumer<MyState>(
           builder: (context, state, child) => TodoList(state.list)),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.lightGreen,
         onPressed: () async {
           var newItem = await Navigator.push(
               context,
@@ -42,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Provider.of<MyState>(context, listen: false).addItem(newItem);
         },
         tooltip: 'ToDo',
-        child: const Icon(Icons.add, size: 50, color: Colors.white),
+        child: const Icon(Icons.add, size: 50, color: Colors.black),
       ),
     );
   }

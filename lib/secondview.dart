@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:template/test.dart';
 import './model.dart';
 
 class SecondView extends StatefulWidget {
@@ -33,7 +34,7 @@ class SecondViewState extends State<SecondView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('TIG169 TODO'),
+          title: const Center(child: Text('TIG169 TODO')),
           /*actions: [
             TextButton(
               child: const Text('ADD', style: TextStyle(color: Colors.black)),
@@ -48,6 +49,7 @@ class SecondViewState extends State<SecondView> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(height: 50),
+            const MyStatefulWidget(),
             Container(
                 margin: const EdgeInsets.only(left: 16, right: 16),
                 child: TextField(

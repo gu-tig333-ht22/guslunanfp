@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Todo List',
       theme: ThemeData(
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.lightGreen,
       ),
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(
