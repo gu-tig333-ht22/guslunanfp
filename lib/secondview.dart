@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:template/test.dart';
 import './model.dart';
 
 class SecondView extends StatefulWidget {
@@ -19,7 +18,7 @@ class SecondViewState extends State<SecondView> {
   late TextEditingController textEditingController;
 
   SecondViewState(TodoItem item) {
-    this.message = item.message;
+    message = item.message;
 
     textEditingController = TextEditingController(text: item.message);
 
@@ -54,9 +53,11 @@ class SecondViewState extends State<SecondView> {
                 child: TextField(
                     controller: textEditingController,
                     decoration: const InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 3.0),
-                    )))),
+                        labelText: '  What are you going to do?',
+                        border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 3.0),
+                        )))),
             Container(height: 50),
             ElevatedButton.icon(
               onPressed: () {

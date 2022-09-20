@@ -27,16 +27,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   const PopupMenuItem(value: 'Undone', child: Text('Undone')),
                   const PopupMenuItem(value: 'Done', child: Text('Done')),
                 ]),
-        /*IconButton(
-          icon: const Icon(Icons.more_vert),
-          onPressed: () async {
-            var newItem = await Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SecondView(TodoItem(message: ''))));
-            Provider.of<MyState>(context, listen: false).addItem(newItem);
-          },
-        )*/
       ]),
       body: Consumer<MyState>(
           builder: (context, state, child) =>
@@ -60,10 +50,10 @@ class _MyHomePageState extends State<MyHomePage> {
 List<TodoItem> _filterList(list, filterBy) {
   if (filterBy == 'all') return list;
   if (filterBy == 'Done') {
-    return list.where((item) => item.message == 'Hej').toList;
+    return list.where((item) => item.done == true).toList();
   }
   if (filterBy == 'Undone') {
-    return list.where((item) => item.message == 'Hej').toList;
+    return list.where((item) => item.done == false).toList();
   }
   return list;
 }

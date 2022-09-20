@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class TodoItem {
   String message;
+  bool done = false;
 
   TodoItem({required this.message});
 }
@@ -24,7 +25,12 @@ class MyState extends ChangeNotifier {
   }
 
   void setFilterBy(filterBy) {
-    this._filterBy = filterBy;
+    _filterBy = filterBy;
+    notifyListeners();
+  }
+
+  void checkItem(item) {
+    item.done = !item.done;
     notifyListeners();
   }
 }
