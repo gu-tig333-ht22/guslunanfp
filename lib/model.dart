@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/secondview.dart';
+import 'internetfetcher.dart';
 
 class TodoItem {
   String message;
@@ -17,6 +17,12 @@ class MyState extends ChangeNotifier {
 
   String _ip = '';
   String get ip => _ip;
+
+  /*String key =
+      'https://todoapp-api.apps.k8s.gu.se/todos?key=739e006e-0612-4134-9c08-f006acd11d8a';
+  String url = 'https://todoapp-api.apps.k8s.gu.se';
+   var apikey = '739e006e-0612-4134-9c08-f006acd11d8a';
+   String path = '/todos';*/
 
   void fetchIp() async {
     var ip = await InternetFetcher.fetchIp();

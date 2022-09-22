@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './model.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class SecondView extends StatefulWidget {
   final TodoItem item;
@@ -55,6 +54,8 @@ class SecondViewState extends State<SecondView> {
             Container(height: 50),
             ElevatedButton.icon(
               onPressed: () {
+                http.post(Uri.parse(
+                    'https://todoapp-api.apps.k8s.gu.se/todos?key=739e006e-0612-4134-9c08-f006acd11d8a'));
                 Navigator.pop(context, TodoItem(message: message));
               },
               icon: const Icon(
@@ -75,7 +76,7 @@ class SecondViewState extends State<SecondView> {
   Widget _content(context) {
     return Column(
       children: [
-        Text('ip'),
+        const Text('ip'),
         ElevatedButton(
           child: const Text('Klick!'),
           onPressed: () {
@@ -89,20 +90,5 @@ class SecondViewState extends State<SecondView> {
   void _doStuff(context) async {
     var state = Provider.of<MyState>(context, listen: false);
     state.fetchIp();
-  }
-}
-
-class InternetFetcher {
-  static Future<String> fetchIp() async {
-    try {
-      http.Response response =
-          await http.get(Uri.parse('https://api.myip.com/'));
-      var jsonData = response.body;
-      var obj = jsonDecode(jsonData);
-      return obj['ip'];
-    } catch (e) {
-      print(e);
-      return '';
-    }
   }
 }
