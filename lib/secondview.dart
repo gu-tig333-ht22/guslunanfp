@@ -87,7 +87,6 @@ class SecondViewState extends State<SecondView> {
   }
 
   void _doStuff(context) async {
-    //await!!
     var state = Provider.of<MyState>(context, listen: false);
     state.fetchIp();
   }
@@ -96,9 +95,8 @@ class SecondViewState extends State<SecondView> {
 class InternetFetcher {
   static Future<String> fetchIp() async {
     try {
-      http.Response response = await http.get(
-          Uri.parse('https://api.myip.com/'),
-          headers: {'Access-Control_Allow_Origin': '*'});
+      http.Response response =
+          await http.get(Uri.parse('https://api.myip.com/'));
       var jsonData = response.body;
       var obj = jsonDecode(jsonData);
       return obj['ip'];
