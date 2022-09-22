@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SecondView extends StatefulWidget {
   final TodoItem item;
@@ -14,7 +17,6 @@ class SecondView extends StatefulWidget {
 
 class SecondViewState extends State<SecondView> {
   late String message;
-
   late TextEditingController textEditingController;
 
   SecondViewState(TodoItem item) {
@@ -34,14 +36,6 @@ class SecondViewState extends State<SecondView> {
     return Scaffold(
         appBar: AppBar(
           title: const Center(child: Text('TIG169 TODO')),
-          /*actions: [
-            TextButton(
-              child: const Text('ADD', style: TextStyle(color: Colors.black)),
-              onPressed: () {
-                //Navigator.pop(context, TodoItem(message: message));
-              },
-            )
-          ]*/
         ),
         body: SingleChildScrollView(
             child: Column(
@@ -68,8 +62,49 @@ class SecondViewState extends State<SecondView> {
                 size: 30.0,
               ),
               label: const Text('ADD'),
-            )
+            ),
+            _content(context),
+            Consumer<MyState>(
+              builder: (context, state, child) => Text(state.ip),
+            ), //TESTING!
           ],
         )));
+  }
+
+//TESTIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIING
+  Widget _content(context) {
+    return Column(
+      children: [
+        Text('ip'),
+        ElevatedButton(
+          child: const Text('Klick!'),
+          onPressed: () {
+            _doStuff(context);
+          },
+        ),
+      ],
+    );
+  }
+
+  void _doStuff(context) async {
+    //await!!
+    var state = Provider.of<MyState>(context, listen: false);
+    state.fetchIp();
+  }
+}
+
+class InternetFetcher {
+  static Future<String> fetchIp() async {
+    try {
+      http.Response response = await http.get(
+          Uri.parse('https://api.myip.com/'),
+          headers: {'Access-Control_Allow_Origin': '*'});
+      var jsonData = response.body;
+      var obj = jsonDecode(jsonData);
+      return obj['ip'];
+    } catch (e) {
+      print(e);
+      return '';
+    }
   }
 }
