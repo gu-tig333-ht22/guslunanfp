@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:template/test.dart';
+import 'package:provider/provider.dart';
 import './model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SecondView extends StatefulWidget {
   final TodoItem item;
@@ -15,11 +17,10 @@ class SecondView extends StatefulWidget {
 
 class SecondViewState extends State<SecondView> {
   late String message;
-
   late TextEditingController textEditingController;
 
   SecondViewState(TodoItem item) {
-    this.message = item.message;
+    message = item.message;
 
     textEditingController = TextEditingController(text: item.message);
 
@@ -35,14 +36,6 @@ class SecondViewState extends State<SecondView> {
     return Scaffold(
         appBar: AppBar(
           title: const Center(child: Text('TIG169 TODO')),
-          /*actions: [
-            TextButton(
-              child: const Text('ADD', style: TextStyle(color: Colors.black)),
-              onPressed: () {
-                //Navigator.pop(context, TodoItem(message: message));
-              },
-            )
-          ]*/
         ),
         body: SingleChildScrollView(
             child: Column(
@@ -54,9 +47,11 @@ class SecondViewState extends State<SecondView> {
                 child: TextField(
                     controller: textEditingController,
                     decoration: const InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 3.0),
-                    )))),
+                        labelText: '  What are you going to do?',
+                        border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 3.0),
+                        )))),
             Container(height: 50),
             ElevatedButton.icon(
               onPressed: () {
@@ -67,8 +62,47 @@ class SecondViewState extends State<SecondView> {
                 size: 30.0,
               ),
               label: const Text('ADD'),
-            )
+            ),
+            _content(context),
+            Consumer<MyState>(
+              builder: (context, state, child) => Text(state.ip),
+            ), //TESTING!
           ],
         )));
+  }
+
+//TESTIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIING
+  Widget _content(context) {
+    return Column(
+      children: [
+        Text('ip'),
+        ElevatedButton(
+          child: const Text('Klick!'),
+          onPressed: () {
+            _doStuff(context);
+          },
+        ),
+      ],
+    );
+  }
+
+  void _doStuff(context) async {
+    var state = Provider.of<MyState>(context, listen: false);
+    state.fetchIp();
+  }
+}
+
+class InternetFetcher {
+  static Future<String> fetchIp() async {
+    try {
+      http.Response response =
+          await http.get(Uri.parse('https://api.myip.com/'));
+      var jsonData = response.body;
+      var obj = jsonDecode(jsonData);
+      return obj['ip'];
+    } catch (e) {
+      print(e);
+      return '';
+    }
   }
 }

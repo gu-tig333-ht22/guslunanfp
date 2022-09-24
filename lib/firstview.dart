@@ -18,19 +18,19 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Center(child: Text(widget.title)), actions: [
-        IconButton(
-          icon: const Icon(Icons.more_vert),
-          onPressed: () async {
-            var newItem = await Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SecondView(TodoItem(message: ''))));
-            Provider.of<MyState>(context, listen: false).addItem(newItem);
-          },
-        )
+        PopupMenuButton(
+            onSelected: (value) {
+              Provider.of<MyState>(context, listen: false).setFilterBy(value);
+            },
+            itemBuilder: (context) => [
+                  const PopupMenuItem(value: 'All', child: Text('All')),
+                  const PopupMenuItem(value: 'Undone', child: Text('Undone')),
+                  const PopupMenuItem(value: 'Done', child: Text('Done')),
+                ]),
       ]),
       body: Consumer<MyState>(
-          builder: (context, state, child) => TodoList(state.list)),
+          builder: (context, state, child) =>
+              TodoList(_filterList(state.list, state.filterBy))),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightGreen,
         onPressed: () async {
@@ -45,4 +45,15 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+List<TodoItem> _filterList(list, filterBy) {
+  if (filterBy == 'all') return list;
+  if (filterBy == 'Done') {
+    return list.where((item) => item.done == true).toList();
+  }
+  if (filterBy == 'Undone') {
+    return list.where((item) => item.done == false).toList();
+  }
+  return list;
 }
