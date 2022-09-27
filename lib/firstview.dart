@@ -37,7 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
           var newItem = await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => SecondView(TodoItem(message: ''))));
+                  builder: (context) => SecondView(
+                      TodoItem(message: '', done: false, id: null))));
           Provider.of<MyState>(context, listen: false).addItem(newItem);
         },
         tooltip: 'ToDo',

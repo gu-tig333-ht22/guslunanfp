@@ -56,7 +56,8 @@ class SecondViewState extends State<SecondView> {
               onPressed: () {
                 http.post(Uri.parse(
                     'https://todoapp-api.apps.k8s.gu.se/todos?key=739e006e-0612-4134-9c08-f006acd11d8a'));
-                Navigator.pop(context, TodoItem(message: message));
+                Navigator.pop(
+                    context, TodoItem(message: message, done: false, id: null));
               },
               icon: const Icon(
                 Icons.add,
