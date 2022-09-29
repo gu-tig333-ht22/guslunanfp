@@ -1,37 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:template/secondview.dart';
+import 'internetfetcher.dart';
 
 class TodoItem {
+  String id;
   String message;
-  bool done = false;
+  bool done;
 
-  TodoItem({required this.message});
+  TodoItem({required this.message, this.done = false, this.id = ''});
+
+  static Map<String, dynamic> toJson(TodoItem item) {
+    return {
+      'title': item.message,
+      'done': item.done,
+    };
+  }
+
+  static TodoItem fromJson(dynamic item) {
+    return TodoItem(message: item['title'], done: item['done'], id: item['id']);
+  }
 }
 
 class MyState extends ChangeNotifier {
-  final List<TodoItem> _list = [];
+  List<TodoItem> _list = [];
   String _filterBy = 'All';
 
   List<TodoItem> get list => _list;
+
   String get filterBy => _filterBy;
 
-  String _ip = '';
+  final String _ip = '';
   String get ip => _ip;
 
-  void fetchIp() async {
-    var ip = await InternetFetcher.fetchIp();
+  MyState() {
+    getList();
+  }
 
-    _ip = ip;
+  Future getList() async {
+    List<TodoItem> list = await InternetFetcher.getList();
+    _list = list;
     notifyListeners();
   }
 
-  void addItem(TodoItem item) {
-    _list.add(item);
+  void addItem(TodoItem item) async {
+    _list = await InternetFetcher.addItem(item);
     notifyListeners();
   }
 
-  void removeItem(TodoItem item) {
-    _list.remove(item);
+  void removeItem(item) async {
+    _list = await InternetFetcher.removeItem(item.id);
     notifyListeners();
   }
 
@@ -40,8 +56,9 @@ class MyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void checkItem(item) {
+  void checkItem(item) async {
     item.done = !item.done;
+    _list = await InternetFetcher.checkItem(item);
     notifyListeners();
   }
 }

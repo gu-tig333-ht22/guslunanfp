@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'model.dart';
 
 class TodoList extends StatelessWidget {
-  final List<TodoItem> list;
+  List<TodoItem> list;
 
-  const TodoList(this.list, {super.key});
+  TodoList(this.list, {super.key});
 
   @override
   Widget build(BuildContext context) {

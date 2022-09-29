@@ -12,7 +12,6 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-//Samma som CardsListView
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
@@ -35,10 +34,10 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.lightGreen,
         onPressed: () async {
           var newItem = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SecondView(TodoItem(message: ''))));
-          Provider.of<MyState>(context, listen: false).addItem(newItem);
+              context, MaterialPageRoute(builder: (context) => SecondView()));
+          if (newItem != null) {
+            Provider.of<MyState>(context, listen: false).addItem(newItem);
+          }
         },
         tooltip: 'ToDo',
         child: const Icon(Icons.add, size: 50, color: Colors.black),
