@@ -35,10 +35,13 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.lightGreen,
         onPressed: () async {
           var newItem = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => SecondView(TodoItem(message: ''))));
-          Provider.of<MyState>(context, listen: false).addItem(newItem);
+              context, MaterialPageRoute(builder: (context) => SecondView()));
+          if (newItem != null) {
+            //ny rad jag lagt till
+
+            //TodoItem(message: '', done: false, id: null))));
+            Provider.of<MyState>(context, listen: false).addItem(newItem);
+          }
         },
         tooltip: 'ToDo',
         child: const Icon(Icons.add, size: 50, color: Colors.black),
