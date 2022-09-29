@@ -4,8 +4,8 @@ import './model.dart';
 import './firstview.dart';
 
 void main() {
-//ropa på listan
   var state = MyState();
+  state.getList();
 
   runApp(
     ChangeNotifierProvider(

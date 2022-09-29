@@ -5,29 +5,18 @@ import 'model.dart';
 class InternetFetcher {
   var apikey = '739e006e-0612-4134-9c08-f006acd11d8a';
 
-  /*static Future<String> getList() async {
-    try {
-      http.Response response = await http.get(Uri.parse(
-          'https://todoapp-api.apps.k8s.gu.se/todos?key=739e006e-0612-4134-9c08-f006acd11d8a'));
-      var jsonData = response.body;
-      var obj = jsonDecode(jsonData);
-      print(response.body);
-      return obj['id'];
-    } catch (e) {
-      print(e);
-      return '';
-    }
-  }*/
-
-/*
-    Future getList() async {
-    http.Response response = await http.get(
+  static Future<List<TodoItem>> getList() async {
+    var response = await http.get(
       Uri.parse(
           'https://todoapp-api.apps.k8s.gu.se/todos?key=739e006e-0612-4134-9c08-f006acd11d8a'),
     );
-    _list = (jsonDecode(response.body));
-    notifyListeners();
-  }*/
+    String bodyString = response.body;
+    var json = jsonDecode(bodyString);
+
+    return json.map<TodoItem>((data) {
+      return TodoItem.fromJson(data);
+    }).toList();
+  }
 
   static Future<List<TodoItem>> addItem(TodoItem item) async {
     Map<String, dynamic> json = TodoItem.toJson(item);
@@ -64,39 +53,3 @@ class InternetFetcher {
     return listFromApi.map((x) => TodoItem.fromJson(x)).toList();
   }
 }
-
-
-
-/*class InternetFetcher {
-  var apikey = '739e006e-0612-4134-9c08-f006acd11d8a';
-  static Future<String> fetchIp() async {
-    try {
-      http.Response response =
-          await http.get(Uri.parse('https://api.myip.com/'));
-      var jsonData = response.body;
-      var obj = jsonDecode(jsonData);
-      return obj['ip'];
-    } catch (e) {
-      print(e);
-      return '';
-    }
-  }
-}*/
-
-/*
-class InternetFetcher {
-  var apikey = '739e006e-0612-4134-9c08-f006acd11d8a';
-  static Future<String> fetchIp() async {
-    try {
-      http.Response response = await http.get(Uri.parse(
-          'https://todoapp-api.apps.k8s.gu.se/todos?key=739e006e-0612-4134-9c08-f006acd11d8a'));
-      var jsonData = response.body;
-      var obj = jsonDecode(jsonData);
-      print(response.body);
-      return obj['id'];
-    } catch (e) {
-      print(e);
-      return '';
-    }
-  }
-}*/

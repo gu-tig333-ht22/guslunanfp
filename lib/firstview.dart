@@ -12,7 +12,6 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-//Samma som CardsListView
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
@@ -37,9 +36,6 @@ class _MyHomePageState extends State<MyHomePage> {
           var newItem = await Navigator.push(
               context, MaterialPageRoute(builder: (context) => SecondView()));
           if (newItem != null) {
-            //ny rad jag lagt till
-
-            //TodoItem(message: '', done: false, id: null))));
             Provider.of<MyState>(context, listen: false).addItem(newItem);
           }
         },
